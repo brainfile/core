@@ -1,0 +1,85 @@
+/**
+ * @brainfile/core - Core library for the Brainfile task management protocol
+ *
+ * This library provides parsing, serialization, validation, and template management
+ * for Brainfile markdown files with YAML frontmatter.
+ *
+ * @packageDocumentation
+ */
+export * from './types';
+export { BrainfileParser, ParseResult } from './parser';
+export { BrainfileSerializer, SerializeOptions } from './serializer';
+export { BrainfileValidator, ValidationError, ValidationResult } from './validator';
+export { BUILT_IN_TEMPLATES, generateTaskId, generateSubtaskId, processTemplate, getTemplateById, getAllTemplateIds } from './templates';
+export type { Board, Column, Task, Subtask, Rule, Rules, TaskTemplate, TemplateVariable, TemplateConfig } from './types';
+/**
+ * Main Brainfile class providing a high-level API
+ */
+export declare class Brainfile {
+    /**
+     * Parse a brainfile.md file content
+     * @param content - The markdown content with YAML frontmatter
+     * @returns Parsed Board object or null if parsing fails
+     */
+    static parse(content: string): Board | null;
+    /**
+     * Parse with detailed error reporting
+     * @param content - The markdown content with YAML frontmatter
+     * @returns ParseResult with board or error message
+     */
+    static parseWithErrors(content: string): import("./parser").ParseResult;
+    /**
+     * Serialize a Board object back to brainfile.md format
+     * @param board - The Board object to serialize
+     * @param options - Optional serialization options
+     * @returns Markdown string with YAML frontmatter
+     */
+    static serialize(board: Board, options?: SerializeOptions): string;
+    /**
+     * Validate a Board object
+     * @param board - The board to validate
+     * @returns ValidationResult with any errors found
+     */
+    static validate(board: any): import("./validator").ValidationResult;
+    /**
+     * Get all built-in templates
+     * @returns Array of built-in templates
+     */
+    static getBuiltInTemplates(): import("./types").TaskTemplate[];
+    /**
+     * Get a template by ID
+     * @param id - The template ID
+     * @returns The template or undefined if not found
+     */
+    static getTemplate(id: string): import("./types").TaskTemplate | undefined;
+    /**
+     * Create a task from a template
+     * @param templateId - The template ID
+     * @param values - Variable values to substitute
+     * @returns A partial Task object
+     */
+    static createFromTemplate(templateId: string, values: Record<string, string>): Partial<import("./types").Task>;
+    /**
+     * Find the location of a task in the file content
+     * @param content - The markdown content
+     * @param taskId - The task ID to find
+     * @returns Line and column location or null if not found
+     */
+    static findTaskLocation(content: string, taskId: string): {
+        line: number;
+        column: number;
+    } | null;
+    /**
+     * Find the location of a rule in the file content
+     * @param content - The markdown content
+     * @param ruleId - The rule ID to find
+     * @param ruleType - The type of rule
+     * @returns Line and column location or null if not found
+     */
+    static findRuleLocation(content: string, ruleId: number, ruleType: "always" | "never" | "prefer" | "context"): {
+        line: number;
+        column: number;
+    } | null;
+}
+import { Board, SerializeOptions } from './index';
+//# sourceMappingURL=index.d.ts.map
