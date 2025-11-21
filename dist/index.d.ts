@@ -10,6 +10,7 @@ export * from './types';
 export { BrainfileParser, ParseResult } from './parser';
 export { BrainfileSerializer, SerializeOptions } from './serializer';
 export { BrainfileValidator, ValidationError, ValidationResult } from './validator';
+export { BrainfileLinter, LintIssue, LintResult, LintOptions } from './linter';
 export { BUILT_IN_TEMPLATES, generateTaskId, generateSubtaskId, processTemplate, getTemplateById, getAllTemplateIds } from './templates';
 export type { Board, Column, Task, Subtask, Rule, Rules, TaskTemplate, TemplateVariable, TemplateConfig } from './types';
 /**
@@ -41,6 +42,13 @@ export declare class Brainfile {
      * @returns ValidationResult with any errors found
      */
     static validate(board: any): import("./validator").ValidationResult;
+    /**
+     * Lint a brainfile.md content string
+     * @param content - The markdown content with YAML frontmatter
+     * @param options - Linting options
+     * @returns LintResult with issues and optionally fixed content
+     */
+    static lint(content: string, options?: LintOptions): import("./linter").LintResult;
     /**
      * Get all built-in templates
      * @returns Array of built-in templates
@@ -82,4 +90,5 @@ export declare class Brainfile {
     } | null;
 }
 import { Board, SerializeOptions } from './index';
+import { LintOptions } from './linter';
 //# sourceMappingURL=index.d.ts.map

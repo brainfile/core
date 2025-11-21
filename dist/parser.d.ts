@@ -6,8 +6,15 @@ import { Board } from "./types";
 export interface ParseResult {
     board: Board | null;
     error?: string;
+    warnings?: string[];
 }
 export declare class BrainfileParser {
+    /**
+     * Consolidate duplicate columns by merging their tasks
+     * @param columns - Array of columns that may contain duplicates
+     * @returns Deduplicated array of columns with merged tasks
+     */
+    private static consolidateDuplicateColumns;
     /**
      * Parse a brainfile.md file content into a Board object
      * @param content - The markdown content with YAML frontmatter
@@ -15,9 +22,9 @@ export declare class BrainfileParser {
      */
     static parse(content: string): Board | null;
     /**
-     * Parse with detailed error reporting
+     * Parse with detailed error reporting and warnings
      * @param content - The markdown content with YAML frontmatter
-     * @returns ParseResult with board or error message
+     * @returns ParseResult with board, error message, and any warnings
      */
     static parseWithErrors(content: string): ParseResult;
     /**

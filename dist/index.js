@@ -22,7 +22,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Brainfile = exports.getAllTemplateIds = exports.getTemplateById = exports.processTemplate = exports.generateSubtaskId = exports.generateTaskId = exports.BUILT_IN_TEMPLATES = exports.BrainfileValidator = exports.BrainfileSerializer = exports.BrainfileParser = void 0;
+exports.Brainfile = exports.getAllTemplateIds = exports.getTemplateById = exports.processTemplate = exports.generateSubtaskId = exports.generateTaskId = exports.BUILT_IN_TEMPLATES = exports.BrainfileLinter = exports.BrainfileValidator = exports.BrainfileSerializer = exports.BrainfileParser = void 0;
 // Export types
 __exportStar(require("./types"), exports);
 // Export parser
@@ -34,6 +34,9 @@ Object.defineProperty(exports, "BrainfileSerializer", { enumerable: true, get: f
 // Export validator
 var validator_1 = require("./validator");
 Object.defineProperty(exports, "BrainfileValidator", { enumerable: true, get: function () { return validator_1.BrainfileValidator; } });
+// Export linter
+var linter_1 = require("./linter");
+Object.defineProperty(exports, "BrainfileLinter", { enumerable: true, get: function () { return linter_1.BrainfileLinter; } });
 // Export templates
 var templates_1 = require("./templates");
 Object.defineProperty(exports, "BUILT_IN_TEMPLATES", { enumerable: true, get: function () { return templates_1.BUILT_IN_TEMPLATES; } });
@@ -78,6 +81,15 @@ class Brainfile {
      */
     static validate(board) {
         return validator_2.BrainfileValidator.validate(board);
+    }
+    /**
+     * Lint a brainfile.md content string
+     * @param content - The markdown content with YAML frontmatter
+     * @param options - Linting options
+     * @returns LintResult with issues and optionally fixed content
+     */
+    static lint(content, options) {
+        return linter_2.BrainfileLinter.lint(content, options);
     }
     /**
      * Get all built-in templates
@@ -131,5 +143,6 @@ exports.Brainfile = Brainfile;
 const parser_2 = require("./parser");
 const serializer_2 = require("./serializer");
 const validator_2 = require("./validator");
+const linter_2 = require("./linter");
 const templates_2 = require("./templates");
 //# sourceMappingURL=index.js.map
