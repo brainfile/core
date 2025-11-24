@@ -22,7 +22,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Brainfile = exports.getAllTemplateIds = exports.getTemplateById = exports.processTemplate = exports.generateSubtaskId = exports.generateTaskId = exports.BUILT_IN_TEMPLATES = exports.hashBoardContent = exports.hashBoard = exports.diffBoards = exports.BrainfileLinter = exports.BrainfileValidator = exports.BrainfileSerializer = exports.loadSchemaHints = exports.parseSchemaHints = exports.inferRenderer = exports.inferType = exports.BrainfileParser = void 0;
+exports.Brainfile = exports.getParentTaskId = exports.isValidSubtaskId = exports.isValidTaskId = exports.generateNextSubtaskId = exports.generateSubtaskIdFromIndex = exports.generateNextTaskId = exports.getMaxTaskIdNumber = exports.extractTaskIdNumber = exports.getOverdueTasks = exports.getTasksWithIncompleteSubtasks = exports.columnExists = exports.getTotalTaskCount = exports.getColumnTaskCount = exports.searchTasks = exports.getTasksByAssignee = exports.getTasksByPriority = exports.getTasksByTag = exports.getAllTasks = exports.taskIdExists = exports.findTaskById = exports.findColumnByName = exports.findColumnById = exports.restoreTask = exports.archiveTask = exports.updateStatsConfig = exports.updateBoardTitle = exports.toggleSubtask = exports.deleteTask = exports.updateTask = exports.addTask = exports.moveTask = exports.getAllTemplateIds = exports.getTemplateById = exports.processTemplate = exports.generateSubtaskId = exports.generateTaskId = exports.BUILT_IN_TEMPLATES = exports.hashBoardContent = exports.hashBoard = exports.diffBoards = exports.BrainfileLinter = exports.BrainfileValidator = exports.BrainfileSerializer = exports.loadSchemaHints = exports.parseSchemaHints = exports.inferRenderer = exports.inferType = exports.BrainfileParser = void 0;
 // Export types
 __exportStar(require("./types"), exports);
 // Export parser
@@ -58,6 +58,43 @@ Object.defineProperty(exports, "generateSubtaskId", { enumerable: true, get: fun
 Object.defineProperty(exports, "processTemplate", { enumerable: true, get: function () { return templates_1.processTemplate; } });
 Object.defineProperty(exports, "getTemplateById", { enumerable: true, get: function () { return templates_1.getTemplateById; } });
 Object.defineProperty(exports, "getAllTemplateIds", { enumerable: true, get: function () { return templates_1.getAllTemplateIds; } });
+// Export board operations
+var operations_1 = require("./operations");
+Object.defineProperty(exports, "moveTask", { enumerable: true, get: function () { return operations_1.moveTask; } });
+Object.defineProperty(exports, "addTask", { enumerable: true, get: function () { return operations_1.addTask; } });
+Object.defineProperty(exports, "updateTask", { enumerable: true, get: function () { return operations_1.updateTask; } });
+Object.defineProperty(exports, "deleteTask", { enumerable: true, get: function () { return operations_1.deleteTask; } });
+Object.defineProperty(exports, "toggleSubtask", { enumerable: true, get: function () { return operations_1.toggleSubtask; } });
+Object.defineProperty(exports, "updateBoardTitle", { enumerable: true, get: function () { return operations_1.updateBoardTitle; } });
+Object.defineProperty(exports, "updateStatsConfig", { enumerable: true, get: function () { return operations_1.updateStatsConfig; } });
+Object.defineProperty(exports, "archiveTask", { enumerable: true, get: function () { return operations_1.archiveTask; } });
+Object.defineProperty(exports, "restoreTask", { enumerable: true, get: function () { return operations_1.restoreTask; } });
+// Export query functions
+var query_1 = require("./query");
+Object.defineProperty(exports, "findColumnById", { enumerable: true, get: function () { return query_1.findColumnById; } });
+Object.defineProperty(exports, "findColumnByName", { enumerable: true, get: function () { return query_1.findColumnByName; } });
+Object.defineProperty(exports, "findTaskById", { enumerable: true, get: function () { return query_1.findTaskById; } });
+Object.defineProperty(exports, "taskIdExists", { enumerable: true, get: function () { return query_1.taskIdExists; } });
+Object.defineProperty(exports, "getAllTasks", { enumerable: true, get: function () { return query_1.getAllTasks; } });
+Object.defineProperty(exports, "getTasksByTag", { enumerable: true, get: function () { return query_1.getTasksByTag; } });
+Object.defineProperty(exports, "getTasksByPriority", { enumerable: true, get: function () { return query_1.getTasksByPriority; } });
+Object.defineProperty(exports, "getTasksByAssignee", { enumerable: true, get: function () { return query_1.getTasksByAssignee; } });
+Object.defineProperty(exports, "searchTasks", { enumerable: true, get: function () { return query_1.searchTasks; } });
+Object.defineProperty(exports, "getColumnTaskCount", { enumerable: true, get: function () { return query_1.getColumnTaskCount; } });
+Object.defineProperty(exports, "getTotalTaskCount", { enumerable: true, get: function () { return query_1.getTotalTaskCount; } });
+Object.defineProperty(exports, "columnExists", { enumerable: true, get: function () { return query_1.columnExists; } });
+Object.defineProperty(exports, "getTasksWithIncompleteSubtasks", { enumerable: true, get: function () { return query_1.getTasksWithIncompleteSubtasks; } });
+Object.defineProperty(exports, "getOverdueTasks", { enumerable: true, get: function () { return query_1.getOverdueTasks; } });
+// Export ID generation utilities
+var idGen_1 = require("./idGen");
+Object.defineProperty(exports, "extractTaskIdNumber", { enumerable: true, get: function () { return idGen_1.extractTaskIdNumber; } });
+Object.defineProperty(exports, "getMaxTaskIdNumber", { enumerable: true, get: function () { return idGen_1.getMaxTaskIdNumber; } });
+Object.defineProperty(exports, "generateNextTaskId", { enumerable: true, get: function () { return idGen_1.generateNextTaskId; } });
+Object.defineProperty(exports, "generateSubtaskIdFromIndex", { enumerable: true, get: function () { return idGen_1.generateSubtaskId; } });
+Object.defineProperty(exports, "generateNextSubtaskId", { enumerable: true, get: function () { return idGen_1.generateNextSubtaskId; } });
+Object.defineProperty(exports, "isValidTaskId", { enumerable: true, get: function () { return idGen_1.isValidTaskId; } });
+Object.defineProperty(exports, "isValidSubtaskId", { enumerable: true, get: function () { return idGen_1.isValidSubtaskId; } });
+Object.defineProperty(exports, "getParentTaskId", { enumerable: true, get: function () { return idGen_1.getParentTaskId; } });
 /**
  * Main Brainfile class providing a high-level API
  */
