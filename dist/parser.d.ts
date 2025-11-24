@@ -2,10 +2,20 @@
  * Parser for Brainfile markdown files with YAML frontmatter
  * @packageDocumentation
  */
-import { Board } from "./types";
+import { Board, Brainfile, RendererType } from "./types";
+import { SchemaHints } from "./inference";
 export interface ParseResult {
-    board: Board | null;
+    /** Parsed brainfile data (type depends on detected type) */
+    data: Brainfile | null;
+    /** Detected brainfile type */
+    type?: string;
+    /** Inferred renderer type */
+    renderer?: RendererType;
+    /** Legacy board accessor (deprecated, use data instead) */
+    board?: Board | null;
+    /** Error message if parsing failed */
     error?: string;
+    /** Warning messages from parser */
     warnings?: string[];
 }
 export declare class BrainfileParser {
@@ -16,17 +26,20 @@ export declare class BrainfileParser {
      */
     private static consolidateDuplicateColumns;
     /**
-     * Parse a brainfile.md file content into a Board object
+     * Parse a brainfile.md file content
      * @param content - The markdown content with YAML frontmatter
-     * @returns Parsed Board object or null if parsing fails
+     * @returns Parsed brainfile data or null if parsing fails
+     * @deprecated Use parseWithErrors() for type detection and error details
      */
-    static parse(content: string): Board | null;
+    static parse(content: string): any | null;
     /**
-     * Parse with detailed error reporting and warnings
+     * Parse with detailed error reporting, warnings, and type detection
      * @param content - The markdown content with YAML frontmatter
-     * @returns ParseResult with board, error message, and any warnings
+     * @param filename - Optional filename for type inference
+     * @param schemaHints - Optional schema hints for renderer inference
+     * @returns ParseResult with data, type, renderer, error message, and any warnings
      */
-    static parseWithErrors(content: string): ParseResult;
+    static parseWithErrors(content: string, filename?: string, schemaHints?: SchemaHints): ParseResult;
     /**
      * Find the line number of a task in the file
      * @param content - The markdown content

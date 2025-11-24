@@ -1,8 +1,8 @@
 /**
- * Serializer for converting Board objects to Brainfile markdown format
+ * Serializer for converting Brainfile objects (all types) to markdown format
  * @packageDocumentation
  */
-import { Board } from "./types";
+import { Board, Brainfile } from "./types";
 export interface SerializeOptions {
     /** YAML indentation (default: 2) */
     indent?: number;
@@ -13,24 +13,25 @@ export interface SerializeOptions {
 }
 export declare class BrainfileSerializer {
     /**
-     * Serialize a Board object back to brainfile.md format
-     * @param board - The Board object to serialize
+     * Serialize any Brainfile object (board, journal, etc.) to markdown format
+     * The type field is automatically preserved if present in the data
+     * @param data - The Brainfile object to serialize (Board, Journal, etc.)
      * @param options - Serialization options
      * @returns Markdown string with YAML frontmatter
      */
-    static serialize(board: Board, options?: SerializeOptions): string;
+    static serialize(data: Brainfile | Board, options?: SerializeOptions): string;
     /**
-     * Serialize a Board object to YAML only (without markdown wrapper)
-     * @param board - The Board object to serialize
+     * Serialize any Brainfile object to YAML only (without markdown wrapper)
+     * @param data - The Brainfile object to serialize
      * @param options - Serialization options
      * @returns YAML string
      */
-    static serializeYamlOnly(board: Board, options?: SerializeOptions): string;
+    static serializeYamlOnly(data: Brainfile | Board, options?: SerializeOptions): string;
     /**
-     * Pretty print a Board object for debugging
-     * @param board - The Board object to print
+     * Pretty print any Brainfile object for debugging
+     * @param data - The Brainfile object to print
      * @returns Pretty-printed JSON string
      */
-    static prettyPrint(board: Board): string;
+    static prettyPrint(data: Brainfile | Board): string;
 }
 //# sourceMappingURL=serializer.d.ts.map

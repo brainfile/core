@@ -1,5 +1,5 @@
 /**
- * Validator for Brainfile Board objects
+ * Validator for Brainfile objects (all types)
  * @packageDocumentation
  */
 export interface ValidationError {
@@ -9,6 +9,7 @@ export interface ValidationError {
 export interface ValidationResult {
     valid: boolean;
     errors: ValidationError[];
+    type?: string;
 }
 export declare class BrainfileValidator {
     /**
@@ -52,5 +53,25 @@ export declare class BrainfileValidator {
      * @returns Array of validation errors
      */
     static validateRule(rule: any, path: string): ValidationError[];
+    /**
+     * Validate any brainfile object with type detection
+     * @param data - The brainfile data to validate
+     * @param filename - Optional filename for type inference
+     * @returns ValidationResult with type and any errors found
+     */
+    static validateBrainfile(data: any, filename?: string): ValidationResult;
+    /**
+     * Validate a Journal object
+     * @param journal - The journal to validate
+     * @returns ValidationResult with any errors found
+     */
+    static validateJournal(journal: any): ValidationResult;
+    /**
+     * Validate a JournalEntry object
+     * @param entry - The entry to validate
+     * @param path - The path for error reporting
+     * @returns Array of validation errors
+     */
+    static validateJournalEntry(entry: any, path: string): ValidationError[];
 }
 //# sourceMappingURL=validator.d.ts.map

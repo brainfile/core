@@ -39,6 +39,8 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BrainfileParser = void 0;
 const yaml = __importStar(require("js-yaml"));
+const types_1 = require("./types");
+const inference_1 = require("./inference");
 class BrainfileParser {
     /**
      * Consolidate duplicate columns by merging their tasks
@@ -67,9 +69,10 @@ class BrainfileParser {
         };
     }
     /**
-     * Parse a brainfile.md file content into a Board object
+     * Parse a brainfile.md file content
      * @param content - The markdown content with YAML frontmatter
-     * @returns Parsed Board object or null if parsing fails
+     * @returns Parsed brainfile data or null if parsing fails
+     * @deprecated Use parseWithErrors() for type detection and error details
      */
     static parse(content) {
         try {
@@ -93,18 +96,18 @@ class BrainfileParser {
             // Extract YAML content
             const yamlContent = lines.slice(1, endIndex).join("\n");
             // Parse YAML
-            const board = yaml.load(yamlContent);
-            // Consolidate duplicate columns
-            if (board && board.columns) {
-                const { columns, warnings } = this.consolidateDuplicateColumns(board.columns);
+            const data = yaml.load(yamlContent);
+            // Consolidate duplicate columns (for board type compatibility)
+            if (data && data.columns) {
+                const { columns, warnings } = this.consolidateDuplicateColumns(data.columns);
                 // Log warnings to console
                 if (warnings.length > 0) {
                     console.warn('[Brainfile Parser] Duplicate columns detected:');
                     warnings.forEach(warning => console.warn(`  - ${warning}`));
                 }
-                board.columns = columns;
+                data.columns = columns;
             }
-            return board;
+            return data;
         }
         catch (error) {
             console.error("Error parsing brainfile.md:", error);
@@ -112,11 +115,13 @@ class BrainfileParser {
         }
     }
     /**
-     * Parse with detailed error reporting and warnings
+     * Parse with detailed error reporting, warnings, and type detection
      * @param content - The markdown content with YAML frontmatter
-     * @returns ParseResult with board, error message, and any warnings
+     * @param filename - Optional filename for type inference
+     * @param schemaHints - Optional schema hints for renderer inference
+     * @returns ParseResult with data, type, renderer, error message, and any warnings
      */
-    static parseWithErrors(content) {
+    static parseWithErrors(content, filename, schemaHints) {
         const warnings = [];
         // Temporarily capture console.warn calls
         const originalWarn = console.warn;
@@ -129,18 +134,25 @@ class BrainfileParser {
             originalWarn(...args);
         };
         try {
-            const board = this.parse(content);
+            const data = this.parse(content);
             // Restore console.warn
             console.warn = originalWarn;
-            if (!board) {
+            if (!data) {
                 return {
+                    data: null,
                     board: null,
                     error: "Failed to parse YAML frontmatter",
                     warnings: warnings.length > 0 ? warnings : undefined
                 };
             }
+            // Infer type and renderer
+            const detectedType = (0, inference_1.inferType)(data, filename);
+            const renderer = (0, inference_1.inferRenderer)(detectedType, data, schemaHints);
             return {
-                board,
+                data,
+                type: detectedType,
+                renderer,
+                board: detectedType === types_1.BrainfileType.BOARD || !data.type ? data : null,
                 warnings: warnings.length > 0 ? warnings : undefined
             };
         }
@@ -148,6 +160,7 @@ class BrainfileParser {
             // Restore console.warn
             console.warn = originalWarn;
             return {
+                data: null,
                 board: null,
                 error: error instanceof Error ? error.message : String(error),
                 warnings: warnings.length > 0 ? warnings : undefined

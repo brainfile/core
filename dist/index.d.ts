@@ -8,9 +8,12 @@
  */
 export * from './types';
 export { BrainfileParser, ParseResult } from './parser';
+export { inferType, inferRenderer, SchemaHints } from './inference';
+export { parseSchemaHints, loadSchemaHints } from './schemaHints';
 export { BrainfileSerializer, SerializeOptions } from './serializer';
 export { BrainfileValidator, ValidationError, ValidationResult } from './validator';
 export { BrainfileLinter, LintIssue, LintResult, LintOptions } from './linter';
+export { diffBoards, hashBoard, hashBoardContent, type BoardDiff, type ColumnDiff, type TaskDiff } from './realtime';
 export { BUILT_IN_TEMPLATES, generateTaskId, generateSubtaskId, processTemplate, getTemplateById, getAllTemplateIds } from './templates';
 export type { Board, Column, Task, Subtask, Rule, Rules, TaskTemplate, TemplateVariable, TemplateConfig } from './types';
 /**
@@ -22,7 +25,7 @@ export declare class Brainfile {
      * @param content - The markdown content with YAML frontmatter
      * @returns Parsed Board object or null if parsing fails
      */
-    static parse(content: string): Board | null;
+    static parse(content: string): any;
     /**
      * Parse with detailed error reporting
      * @param content - The markdown content with YAML frontmatter

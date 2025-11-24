@@ -22,12 +22,20 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Brainfile = exports.getAllTemplateIds = exports.getTemplateById = exports.processTemplate = exports.generateSubtaskId = exports.generateTaskId = exports.BUILT_IN_TEMPLATES = exports.BrainfileLinter = exports.BrainfileValidator = exports.BrainfileSerializer = exports.BrainfileParser = void 0;
+exports.Brainfile = exports.getAllTemplateIds = exports.getTemplateById = exports.processTemplate = exports.generateSubtaskId = exports.generateTaskId = exports.BUILT_IN_TEMPLATES = exports.hashBoardContent = exports.hashBoard = exports.diffBoards = exports.BrainfileLinter = exports.BrainfileValidator = exports.BrainfileSerializer = exports.loadSchemaHints = exports.parseSchemaHints = exports.inferRenderer = exports.inferType = exports.BrainfileParser = void 0;
 // Export types
 __exportStar(require("./types"), exports);
 // Export parser
 var parser_1 = require("./parser");
 Object.defineProperty(exports, "BrainfileParser", { enumerable: true, get: function () { return parser_1.BrainfileParser; } });
+// Export inference functions
+var inference_1 = require("./inference");
+Object.defineProperty(exports, "inferType", { enumerable: true, get: function () { return inference_1.inferType; } });
+Object.defineProperty(exports, "inferRenderer", { enumerable: true, get: function () { return inference_1.inferRenderer; } });
+// Export schema hints parser
+var schemaHints_1 = require("./schemaHints");
+Object.defineProperty(exports, "parseSchemaHints", { enumerable: true, get: function () { return schemaHints_1.parseSchemaHints; } });
+Object.defineProperty(exports, "loadSchemaHints", { enumerable: true, get: function () { return schemaHints_1.loadSchemaHints; } });
 // Export serializer
 var serializer_1 = require("./serializer");
 Object.defineProperty(exports, "BrainfileSerializer", { enumerable: true, get: function () { return serializer_1.BrainfileSerializer; } });
@@ -37,6 +45,11 @@ Object.defineProperty(exports, "BrainfileValidator", { enumerable: true, get: fu
 // Export linter
 var linter_1 = require("./linter");
 Object.defineProperty(exports, "BrainfileLinter", { enumerable: true, get: function () { return linter_1.BrainfileLinter; } });
+// Export realtime helpers
+var realtime_1 = require("./realtime");
+Object.defineProperty(exports, "diffBoards", { enumerable: true, get: function () { return realtime_1.diffBoards; } });
+Object.defineProperty(exports, "hashBoard", { enumerable: true, get: function () { return realtime_1.hashBoard; } });
+Object.defineProperty(exports, "hashBoardContent", { enumerable: true, get: function () { return realtime_1.hashBoardContent; } });
 // Export templates
 var templates_1 = require("./templates");
 Object.defineProperty(exports, "BUILT_IN_TEMPLATES", { enumerable: true, get: function () { return templates_1.BUILT_IN_TEMPLATES; } });

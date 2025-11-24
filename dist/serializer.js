@@ -1,6 +1,6 @@
 "use strict";
 /**
- * Serializer for converting Board objects to Brainfile markdown format
+ * Serializer for converting Brainfile objects (all types) to markdown format
  * @packageDocumentation
  */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -41,14 +41,15 @@ exports.BrainfileSerializer = void 0;
 const yaml = __importStar(require("js-yaml"));
 class BrainfileSerializer {
     /**
-     * Serialize a Board object back to brainfile.md format
-     * @param board - The Board object to serialize
+     * Serialize any Brainfile object (board, journal, etc.) to markdown format
+     * The type field is automatically preserved if present in the data
+     * @param data - The Brainfile object to serialize (Board, Journal, etc.)
      * @param options - Serialization options
      * @returns Markdown string with YAML frontmatter
      */
-    static serialize(board, options = {}) {
+    static serialize(data, options = {}) {
         const { indent = 2, lineWidth = -1, trailingNewline = true } = options;
-        const yamlContent = yaml.dump(board, {
+        const yamlContent = yaml.dump(data, {
             indent,
             lineWidth,
             noRefs: true,
@@ -60,14 +61,14 @@ class BrainfileSerializer {
         return trailingNewline ? result : result.trimEnd();
     }
     /**
-     * Serialize a Board object to YAML only (without markdown wrapper)
-     * @param board - The Board object to serialize
+     * Serialize any Brainfile object to YAML only (without markdown wrapper)
+     * @param data - The Brainfile object to serialize
      * @param options - Serialization options
      * @returns YAML string
      */
-    static serializeYamlOnly(board, options = {}) {
+    static serializeYamlOnly(data, options = {}) {
         const { indent = 2, lineWidth = -1 } = options;
-        return yaml.dump(board, {
+        return yaml.dump(data, {
             indent,
             lineWidth,
             noRefs: true,
@@ -75,12 +76,12 @@ class BrainfileSerializer {
         });
     }
     /**
-     * Pretty print a Board object for debugging
-     * @param board - The Board object to print
+     * Pretty print any Brainfile object for debugging
+     * @param data - The Brainfile object to print
      * @returns Pretty-printed JSON string
      */
-    static prettyPrint(board) {
-        return JSON.stringify(board, null, 2);
+    static prettyPrint(data) {
+        return JSON.stringify(data, null, 2);
     }
 }
 exports.BrainfileSerializer = BrainfileSerializer;
