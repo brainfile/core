@@ -18,7 +18,7 @@ export { BUILT_IN_TEMPLATES, generateTaskId, generateSubtaskId, processTemplate,
 export { type BoardOperationResult, type BulkOperationResult, type BulkItemResult, type TaskInput, type TaskPatch, moveTask, addTask, updateTask, deleteTask, toggleSubtask, updateBoardTitle, updateStatsConfig, archiveTask, restoreTask, patchTask, addSubtask, deleteSubtask, updateSubtask, setSubtasksCompleted, setAllSubtasksCompleted, moveTasks, patchTasks, deleteTasks, archiveTasks, } from './operations';
 export { findColumnById, findColumnByName, findTaskById, taskIdExists, getAllTasks, getTasksByTag, getTasksByPriority, getTasksByAssignee, searchTasks, getColumnTaskCount, getTotalTaskCount, columnExists, getTasksWithIncompleteSubtasks, getOverdueTasks } from './query';
 export { extractTaskIdNumber, getMaxTaskIdNumber, generateNextTaskId, generateSubtaskId as generateSubtaskIdFromIndex, generateNextSubtaskId, isValidTaskId, isValidSubtaskId, getParentTaskId } from './idGen';
-export { discover, findPrimaryBrainfile, watchBrainfiles, isBrainfileName, extractBrainfileSuffix, BRAINFILE_PATTERNS, BRAINFILE_GLOBS, EXCLUDE_DIRS, type DiscoveredFile, type DiscoveryOptions, type DiscoveryResult, } from './discovery';
+export { discover, findPrimaryBrainfile, findNearestBrainfile, watchBrainfiles, isBrainfileName, extractBrainfileSuffix, BRAINFILE_PATTERNS, BRAINFILE_GLOBS, EXCLUDE_DIRS, type DiscoveredFile, type DiscoveryOptions, type DiscoveryResult, } from './discovery';
 export type { Board, Column, Task, Subtask, Rule, Rules, TaskTemplate, TemplateVariable, TemplateConfig } from './types';
 /**
  * Main Brainfile class providing a high-level API
