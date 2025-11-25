@@ -22,7 +22,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Brainfile = exports.getParentTaskId = exports.isValidSubtaskId = exports.isValidTaskId = exports.generateNextSubtaskId = exports.generateSubtaskIdFromIndex = exports.generateNextTaskId = exports.getMaxTaskIdNumber = exports.extractTaskIdNumber = exports.getOverdueTasks = exports.getTasksWithIncompleteSubtasks = exports.columnExists = exports.getTotalTaskCount = exports.getColumnTaskCount = exports.searchTasks = exports.getTasksByAssignee = exports.getTasksByPriority = exports.getTasksByTag = exports.getAllTasks = exports.taskIdExists = exports.findTaskById = exports.findColumnByName = exports.findColumnById = exports.restoreTask = exports.archiveTask = exports.updateStatsConfig = exports.updateBoardTitle = exports.toggleSubtask = exports.deleteTask = exports.updateTask = exports.addTask = exports.moveTask = exports.getAllTemplateIds = exports.getTemplateById = exports.processTemplate = exports.generateSubtaskId = exports.generateTaskId = exports.BUILT_IN_TEMPLATES = exports.hashBoardContent = exports.hashBoard = exports.diffBoards = exports.BrainfileLinter = exports.BrainfileValidator = exports.BrainfileSerializer = exports.loadSchemaHints = exports.parseSchemaHints = exports.inferRenderer = exports.inferType = exports.BrainfileParser = void 0;
+exports.isValidTaskId = exports.generateNextSubtaskId = exports.generateSubtaskIdFromIndex = exports.generateNextTaskId = exports.getMaxTaskIdNumber = exports.extractTaskIdNumber = exports.getOverdueTasks = exports.getTasksWithIncompleteSubtasks = exports.columnExists = exports.getTotalTaskCount = exports.getColumnTaskCount = exports.searchTasks = exports.getTasksByAssignee = exports.getTasksByPriority = exports.getTasksByTag = exports.getAllTasks = exports.taskIdExists = exports.findTaskById = exports.findColumnByName = exports.findColumnById = exports.updateSubtask = exports.deleteSubtask = exports.addSubtask = exports.patchTask = exports.restoreTask = exports.archiveTask = exports.updateStatsConfig = exports.updateBoardTitle = exports.toggleSubtask = exports.deleteTask = exports.updateTask = exports.addTask = exports.moveTask = exports.getAllTemplateIds = exports.getTemplateById = exports.processTemplate = exports.generateSubtaskId = exports.generateTaskId = exports.BUILT_IN_TEMPLATES = exports.hashBoardContent = exports.hashBoard = exports.diffBoards = exports.BrainfileLinter = exports.BrainfileValidator = exports.BrainfileSerializer = exports.loadSchemaHints = exports.parseSchemaHints = exports.inferRenderer = exports.inferType = exports.BrainfileParser = void 0;
+exports.Brainfile = exports.getParentTaskId = exports.isValidSubtaskId = void 0;
 // Export types
 __exportStar(require("./types"), exports);
 // Export parser
@@ -69,6 +70,10 @@ Object.defineProperty(exports, "updateBoardTitle", { enumerable: true, get: func
 Object.defineProperty(exports, "updateStatsConfig", { enumerable: true, get: function () { return operations_1.updateStatsConfig; } });
 Object.defineProperty(exports, "archiveTask", { enumerable: true, get: function () { return operations_1.archiveTask; } });
 Object.defineProperty(exports, "restoreTask", { enumerable: true, get: function () { return operations_1.restoreTask; } });
+Object.defineProperty(exports, "patchTask", { enumerable: true, get: function () { return operations_1.patchTask; } });
+Object.defineProperty(exports, "addSubtask", { enumerable: true, get: function () { return operations_1.addSubtask; } });
+Object.defineProperty(exports, "deleteSubtask", { enumerable: true, get: function () { return operations_1.deleteSubtask; } });
+Object.defineProperty(exports, "updateSubtask", { enumerable: true, get: function () { return operations_1.updateSubtask; } });
 // Export query functions
 var query_1 = require("./query");
 Object.defineProperty(exports, "findColumnById", { enumerable: true, get: function () { return query_1.findColumnById; } });

@@ -15,7 +15,7 @@ export { BrainfileValidator, ValidationError, ValidationResult } from './validat
 export { BrainfileLinter, LintIssue, LintResult, LintOptions } from './linter';
 export { diffBoards, hashBoard, hashBoardContent, type BoardDiff, type ColumnDiff, type TaskDiff } from './realtime';
 export { BUILT_IN_TEMPLATES, generateTaskId, generateSubtaskId, processTemplate, getTemplateById, getAllTemplateIds } from './templates';
-export { type BoardOperationResult, moveTask, addTask, updateTask, deleteTask, toggleSubtask, updateBoardTitle, updateStatsConfig, archiveTask, restoreTask } from './operations';
+export { type BoardOperationResult, type TaskInput, type TaskPatch, moveTask, addTask, updateTask, deleteTask, toggleSubtask, updateBoardTitle, updateStatsConfig, archiveTask, restoreTask, patchTask, addSubtask, deleteSubtask, updateSubtask } from './operations';
 export { findColumnById, findColumnByName, findTaskById, taskIdExists, getAllTasks, getTasksByTag, getTasksByPriority, getTasksByAssignee, searchTasks, getColumnTaskCount, getTotalTaskCount, columnExists, getTasksWithIncompleteSubtasks, getOverdueTasks } from './query';
 export { extractTaskIdNumber, getMaxTaskIdNumber, generateNextTaskId, generateSubtaskId as generateSubtaskIdFromIndex, generateNextSubtaskId, isValidTaskId, isValidSubtaskId, getParentTaskId } from './idGen';
 export type { Board, Column, Task, Subtask, Rule, Rules, TaskTemplate, TemplateVariable, TemplateConfig } from './types';
