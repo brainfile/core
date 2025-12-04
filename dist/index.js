@@ -22,8 +22,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOverdueTasks = exports.getTasksWithIncompleteSubtasks = exports.columnExists = exports.getTotalTaskCount = exports.getColumnTaskCount = exports.searchTasks = exports.getTasksByAssignee = exports.getTasksByPriority = exports.getTasksByTag = exports.getAllTasks = exports.taskIdExists = exports.findTaskById = exports.findColumnByName = exports.findColumnById = exports.archiveTasks = exports.deleteTasks = exports.patchTasks = exports.moveTasks = exports.setAllSubtasksCompleted = exports.setSubtasksCompleted = exports.updateSubtask = exports.deleteSubtask = exports.addSubtask = exports.patchTask = exports.restoreTask = exports.archiveTask = exports.updateStatsConfig = exports.updateBoardTitle = exports.toggleSubtask = exports.deleteTask = exports.updateTask = exports.addTask = exports.moveTask = exports.getAllTemplateIds = exports.getTemplateById = exports.processTemplate = exports.generateSubtaskId = exports.generateTaskId = exports.BUILT_IN_TEMPLATES = exports.hashBoardContent = exports.hashBoard = exports.diffBoards = exports.BrainfileLinter = exports.BrainfileValidator = exports.BrainfileSerializer = exports.loadSchemaHints = exports.parseSchemaHints = exports.inferRenderer = exports.inferType = exports.BrainfileParser = void 0;
-exports.Brainfile = exports.EXCLUDE_DIRS = exports.BRAINFILE_GLOBS = exports.BRAINFILE_PATTERNS = exports.extractBrainfileSuffix = exports.isBrainfileName = exports.watchBrainfiles = exports.findNearestBrainfile = exports.findPrimaryBrainfile = exports.discover = exports.getParentTaskId = exports.isValidSubtaskId = exports.isValidTaskId = exports.generateNextSubtaskId = exports.generateSubtaskIdFromIndex = exports.generateNextTaskId = exports.getMaxTaskIdNumber = exports.extractTaskIdNumber = void 0;
+exports.columnExists = exports.getTotalTaskCount = exports.getColumnTaskCount = exports.searchTasks = exports.getTasksByAssignee = exports.getTasksByPriority = exports.getTasksByTag = exports.getAllTasks = exports.taskIdExists = exports.findTaskById = exports.findColumnByName = exports.findColumnById = exports.deleteRule = exports.addRule = exports.archiveTasks = exports.deleteTasks = exports.patchTasks = exports.moveTasks = exports.setAllSubtasksCompleted = exports.setSubtasksCompleted = exports.updateSubtask = exports.deleteSubtask = exports.addSubtask = exports.patchTask = exports.restoreTask = exports.archiveTask = exports.updateStatsConfig = exports.updateBoardTitle = exports.toggleSubtask = exports.deleteTask = exports.updateTask = exports.addTask = exports.moveTask = exports.getAllTemplateIds = exports.getTemplateById = exports.processTemplate = exports.generateSubtaskId = exports.generateTaskId = exports.BUILT_IN_TEMPLATES = exports.hashBoardContent = exports.hashBoard = exports.diffBoards = exports.BrainfileLinter = exports.BrainfileValidator = exports.BrainfileSerializer = exports.loadSchemaHints = exports.parseSchemaHints = exports.inferRenderer = exports.inferType = exports.BrainfileParser = void 0;
+exports.Brainfile = exports.formatTaskForLinear = exports.formatTaskForGitHub = exports.EXCLUDE_DIRS = exports.BRAINFILE_GLOBS = exports.BRAINFILE_PATTERNS = exports.extractBrainfileSuffix = exports.isBrainfileName = exports.watchBrainfiles = exports.findNearestBrainfile = exports.findPrimaryBrainfile = exports.discover = exports.getParentTaskId = exports.isValidSubtaskId = exports.isValidTaskId = exports.generateNextSubtaskId = exports.generateSubtaskIdFromIndex = exports.generateNextTaskId = exports.getMaxTaskIdNumber = exports.extractTaskIdNumber = exports.getOverdueTasks = exports.getTasksWithIncompleteSubtasks = void 0;
 // Export types
 __exportStar(require("./types"), exports);
 // Export parser
@@ -81,6 +81,9 @@ Object.defineProperty(exports, "moveTasks", { enumerable: true, get: function ()
 Object.defineProperty(exports, "patchTasks", { enumerable: true, get: function () { return operations_1.patchTasks; } });
 Object.defineProperty(exports, "deleteTasks", { enumerable: true, get: function () { return operations_1.deleteTasks; } });
 Object.defineProperty(exports, "archiveTasks", { enumerable: true, get: function () { return operations_1.archiveTasks; } });
+// Rule operations
+Object.defineProperty(exports, "addRule", { enumerable: true, get: function () { return operations_1.addRule; } });
+Object.defineProperty(exports, "deleteRule", { enumerable: true, get: function () { return operations_1.deleteRule; } });
 // Export query functions
 var query_1 = require("./query");
 Object.defineProperty(exports, "findColumnById", { enumerable: true, get: function () { return query_1.findColumnById; } });
@@ -118,6 +121,10 @@ Object.defineProperty(exports, "extractBrainfileSuffix", { enumerable: true, get
 Object.defineProperty(exports, "BRAINFILE_PATTERNS", { enumerable: true, get: function () { return discovery_1.BRAINFILE_PATTERNS; } });
 Object.defineProperty(exports, "BRAINFILE_GLOBS", { enumerable: true, get: function () { return discovery_1.BRAINFILE_GLOBS; } });
 Object.defineProperty(exports, "EXCLUDE_DIRS", { enumerable: true, get: function () { return discovery_1.EXCLUDE_DIRS; } });
+// Export formatters for external services
+var formatters_1 = require("./formatters");
+Object.defineProperty(exports, "formatTaskForGitHub", { enumerable: true, get: function () { return formatters_1.formatTaskForGitHub; } });
+Object.defineProperty(exports, "formatTaskForLinear", { enumerable: true, get: function () { return formatters_1.formatTaskForLinear; } });
 /**
  * Main Brainfile class providing a high-level API
  */
