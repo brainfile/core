@@ -22,10 +22,24 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.columnExists = exports.getTotalTaskCount = exports.getColumnTaskCount = exports.searchTasks = exports.getTasksByAssignee = exports.getTasksByPriority = exports.getTasksByTag = exports.getAllTasks = exports.taskIdExists = exports.findTaskById = exports.findColumnByName = exports.findColumnById = exports.deleteRule = exports.addRule = exports.archiveTasks = exports.deleteTasks = exports.patchTasks = exports.moveTasks = exports.setAllSubtasksCompleted = exports.setSubtasksCompleted = exports.updateSubtask = exports.deleteSubtask = exports.addSubtask = exports.patchTask = exports.restoreTask = exports.archiveTask = exports.updateStatsConfig = exports.updateBoardTitle = exports.toggleSubtask = exports.deleteTask = exports.updateTask = exports.addTask = exports.moveTask = exports.getAllTemplateIds = exports.getTemplateById = exports.processTemplate = exports.generateSubtaskId = exports.generateTaskId = exports.BUILT_IN_TEMPLATES = exports.hashBoardContent = exports.hashBoard = exports.diffBoards = exports.BrainfileLinter = exports.BrainfileValidator = exports.BrainfileSerializer = exports.loadSchemaHints = exports.parseSchemaHints = exports.inferRenderer = exports.inferType = exports.BrainfileParser = void 0;
-exports.Brainfile = exports.formatTaskForLinear = exports.formatTaskForGitHub = exports.EXCLUDE_DIRS = exports.BRAINFILE_GLOBS = exports.BRAINFILE_PATTERNS = exports.extractBrainfileSuffix = exports.isBrainfileName = exports.watchBrainfiles = exports.findNearestBrainfile = exports.findPrimaryBrainfile = exports.discover = exports.getParentTaskId = exports.isValidSubtaskId = exports.isValidTaskId = exports.generateNextSubtaskId = exports.generateSubtaskIdFromIndex = exports.generateNextTaskId = exports.getMaxTaskIdNumber = exports.extractTaskIdNumber = exports.getOverdueTasks = exports.getTasksWithIncompleteSubtasks = void 0;
+exports.validateType = exports.getBoardTypes = exports.deleteRule = exports.addRule = exports.archiveTasks = exports.deleteTasks = exports.patchTasks = exports.moveTasks = exports.setAllSubtasksCompleted = exports.setSubtasksCompleted = exports.updateSubtask = exports.deleteSubtask = exports.addSubtask = exports.patchTask = exports.restoreTask = exports.archiveTask = exports.updateStatsConfig = exports.updateBoardTitle = exports.toggleSubtask = exports.deleteTask = exports.updateTask = exports.addTask = exports.moveTask = exports.getAllTemplateIds = exports.getTemplateById = exports.processTemplate = exports.generateSubtaskId = exports.generateTaskId = exports.BUILT_IN_TEMPLATES = exports.hashBoardContent = exports.hashBoard = exports.diffBoards = exports.BrainfileLinter = exports.BrainfileValidator = exports.BrainfileSerializer = exports.loadSchemaHints = exports.parseSchemaHints = exports.inferRenderer = exports.inferType = exports.BrainfileParser = exports.removeTaskContractConstraint = exports.addTaskContractConstraint = exports.removeTaskContractValidationCommand = exports.addTaskContractValidationCommand = exports.removeTaskContractDeliverable = exports.addTaskContractDeliverable = exports.patchTaskContract = exports.setTaskContractStatus = exports.clearTaskContract = exports.setTaskContract = void 0;
+exports.readTaskFile = exports.serializeTaskContent = exports.parseTaskContent = exports.formatTaskForLinear = exports.formatTaskForGitHub = exports.DOT_BRAINFILE_GITIGNORE_BASENAME = exports.BRAINFILE_STATE_BASENAME = exports.BRAINFILE_BASENAME = exports.DOT_BRAINFILE_DIRNAME = exports.ensureDotBrainfileGitignore = exports.ensureDotBrainfileDir = exports.getDotBrainfileGitignorePath = exports.getBrainfileStatePath = exports.getBrainfileStateDir = exports.resolveBrainfilePath = exports.findBrainfile = exports.EXCLUDE_DIRS = exports.BRAINFILE_GLOBS = exports.BRAINFILE_PATTERNS = exports.extractBrainfileSuffix = exports.isBrainfileName = exports.watchBrainfiles = exports.findNearestBrainfile = exports.findPrimaryBrainfile = exports.discover = exports.getParentTaskId = exports.isValidSubtaskId = exports.isValidTaskId = exports.generateNextSubtaskId = exports.generateSubtaskIdFromIndex = exports.generateNextTaskId = exports.getMaxTaskIdNumber = exports.extractTaskIdNumber = exports.getOverdueTasks = exports.getTasksWithIncompleteSubtasks = exports.isCompletionColumn = exports.findCompletionColumn = exports.columnExists = exports.getTotalTaskCount = exports.getColumnTaskCount = exports.searchTasks = exports.getTasksByAssignee = exports.getTasksByPriority = exports.getTasksByTag = exports.getAllTasks = exports.taskIdExists = exports.findTaskById = exports.findColumnByName = exports.findColumnById = exports.validateColumn = void 0;
+exports.Brainfile = exports.buildBoardFromV2 = exports.readV2BoardConfig = exports.composeBody = exports.extractLog = exports.extractDescription = exports.findV2Task = exports.getLogFilePath = exports.getTaskFilePath = exports.ensureV2Dirs = exports.isV2 = exports.getV2Dirs = exports.searchLogs = exports.searchTaskFiles = exports.findTask = exports.listTasks = exports.appendLog = exports.deleteTaskFile = exports.completeTaskFile = exports.moveTaskFile = exports.addTaskFile = exports.generateNextFileTaskId = exports.taskFileName = exports.readTasksDir = exports.writeTaskFile = void 0;
 // Export types
 __exportStar(require("./types"), exports);
+// Export contract types (optional task extension) and operations
+__exportStar(require("./types/contract"), exports);
+var contract_1 = require("./contract");
+Object.defineProperty(exports, "setTaskContract", { enumerable: true, get: function () { return contract_1.setTaskContract; } });
+Object.defineProperty(exports, "clearTaskContract", { enumerable: true, get: function () { return contract_1.clearTaskContract; } });
+Object.defineProperty(exports, "setTaskContractStatus", { enumerable: true, get: function () { return contract_1.setTaskContractStatus; } });
+Object.defineProperty(exports, "patchTaskContract", { enumerable: true, get: function () { return contract_1.patchTaskContract; } });
+Object.defineProperty(exports, "addTaskContractDeliverable", { enumerable: true, get: function () { return contract_1.addTaskContractDeliverable; } });
+Object.defineProperty(exports, "removeTaskContractDeliverable", { enumerable: true, get: function () { return contract_1.removeTaskContractDeliverable; } });
+Object.defineProperty(exports, "addTaskContractValidationCommand", { enumerable: true, get: function () { return contract_1.addTaskContractValidationCommand; } });
+Object.defineProperty(exports, "removeTaskContractValidationCommand", { enumerable: true, get: function () { return contract_1.removeTaskContractValidationCommand; } });
+Object.defineProperty(exports, "addTaskContractConstraint", { enumerable: true, get: function () { return contract_1.addTaskContractConstraint; } });
+Object.defineProperty(exports, "removeTaskContractConstraint", { enumerable: true, get: function () { return contract_1.removeTaskContractConstraint; } });
 // Export parser
 var parser_1 = require("./parser");
 Object.defineProperty(exports, "BrainfileParser", { enumerable: true, get: function () { return parser_1.BrainfileParser; } });
@@ -84,6 +98,11 @@ Object.defineProperty(exports, "archiveTasks", { enumerable: true, get: function
 // Rule operations
 Object.defineProperty(exports, "addRule", { enumerable: true, get: function () { return operations_1.addRule; } });
 Object.defineProperty(exports, "deleteRule", { enumerable: true, get: function () { return operations_1.deleteRule; } });
+// Export strict board validation helpers
+var boardValidation_1 = require("./boardValidation");
+Object.defineProperty(exports, "getBoardTypes", { enumerable: true, get: function () { return boardValidation_1.getBoardTypes; } });
+Object.defineProperty(exports, "validateType", { enumerable: true, get: function () { return boardValidation_1.validateType; } });
+Object.defineProperty(exports, "validateColumn", { enumerable: true, get: function () { return boardValidation_1.validateColumn; } });
 // Export query functions
 var query_1 = require("./query");
 Object.defineProperty(exports, "findColumnById", { enumerable: true, get: function () { return query_1.findColumnById; } });
@@ -98,6 +117,8 @@ Object.defineProperty(exports, "searchTasks", { enumerable: true, get: function 
 Object.defineProperty(exports, "getColumnTaskCount", { enumerable: true, get: function () { return query_1.getColumnTaskCount; } });
 Object.defineProperty(exports, "getTotalTaskCount", { enumerable: true, get: function () { return query_1.getTotalTaskCount; } });
 Object.defineProperty(exports, "columnExists", { enumerable: true, get: function () { return query_1.columnExists; } });
+Object.defineProperty(exports, "findCompletionColumn", { enumerable: true, get: function () { return query_1.findCompletionColumn; } });
+Object.defineProperty(exports, "isCompletionColumn", { enumerable: true, get: function () { return query_1.isCompletionColumn; } });
 Object.defineProperty(exports, "getTasksWithIncompleteSubtasks", { enumerable: true, get: function () { return query_1.getTasksWithIncompleteSubtasks; } });
 Object.defineProperty(exports, "getOverdueTasks", { enumerable: true, get: function () { return query_1.getOverdueTasks; } });
 // Export ID generation utilities
@@ -121,10 +142,56 @@ Object.defineProperty(exports, "extractBrainfileSuffix", { enumerable: true, get
 Object.defineProperty(exports, "BRAINFILE_PATTERNS", { enumerable: true, get: function () { return discovery_1.BRAINFILE_PATTERNS; } });
 Object.defineProperty(exports, "BRAINFILE_GLOBS", { enumerable: true, get: function () { return discovery_1.BRAINFILE_GLOBS; } });
 Object.defineProperty(exports, "EXCLUDE_DIRS", { enumerable: true, get: function () { return discovery_1.EXCLUDE_DIRS; } });
+// Export filesystem helpers (brainfile path resolution + .brainfile helpers)
+var files_1 = require("./utils/files");
+Object.defineProperty(exports, "findBrainfile", { enumerable: true, get: function () { return files_1.findBrainfile; } });
+Object.defineProperty(exports, "resolveBrainfilePath", { enumerable: true, get: function () { return files_1.resolveBrainfilePath; } });
+Object.defineProperty(exports, "getBrainfileStateDir", { enumerable: true, get: function () { return files_1.getBrainfileStateDir; } });
+Object.defineProperty(exports, "getBrainfileStatePath", { enumerable: true, get: function () { return files_1.getBrainfileStatePath; } });
+Object.defineProperty(exports, "getDotBrainfileGitignorePath", { enumerable: true, get: function () { return files_1.getDotBrainfileGitignorePath; } });
+Object.defineProperty(exports, "ensureDotBrainfileDir", { enumerable: true, get: function () { return files_1.ensureDotBrainfileDir; } });
+Object.defineProperty(exports, "ensureDotBrainfileGitignore", { enumerable: true, get: function () { return files_1.ensureDotBrainfileGitignore; } });
+Object.defineProperty(exports, "DOT_BRAINFILE_DIRNAME", { enumerable: true, get: function () { return files_1.DOT_BRAINFILE_DIRNAME; } });
+Object.defineProperty(exports, "BRAINFILE_BASENAME", { enumerable: true, get: function () { return files_1.BRAINFILE_BASENAME; } });
+Object.defineProperty(exports, "BRAINFILE_STATE_BASENAME", { enumerable: true, get: function () { return files_1.BRAINFILE_STATE_BASENAME; } });
+Object.defineProperty(exports, "DOT_BRAINFILE_GITIGNORE_BASENAME", { enumerable: true, get: function () { return files_1.DOT_BRAINFILE_GITIGNORE_BASENAME; } });
 // Export formatters for external services
 var formatters_1 = require("./formatters");
 Object.defineProperty(exports, "formatTaskForGitHub", { enumerable: true, get: function () { return formatters_1.formatTaskForGitHub; } });
 Object.defineProperty(exports, "formatTaskForLinear", { enumerable: true, get: function () { return formatters_1.formatTaskForLinear; } });
+// Export task file reader/writer (v2 per-task file architecture)
+var taskFile_1 = require("./taskFile");
+Object.defineProperty(exports, "parseTaskContent", { enumerable: true, get: function () { return taskFile_1.parseTaskContent; } });
+Object.defineProperty(exports, "serializeTaskContent", { enumerable: true, get: function () { return taskFile_1.serializeTaskContent; } });
+Object.defineProperty(exports, "readTaskFile", { enumerable: true, get: function () { return taskFile_1.readTaskFile; } });
+Object.defineProperty(exports, "writeTaskFile", { enumerable: true, get: function () { return taskFile_1.writeTaskFile; } });
+Object.defineProperty(exports, "readTasksDir", { enumerable: true, get: function () { return taskFile_1.readTasksDir; } });
+Object.defineProperty(exports, "taskFileName", { enumerable: true, get: function () { return taskFile_1.taskFileName; } });
+// Export file-based task operations (v2 per-task file architecture)
+var taskOperations_1 = require("./taskOperations");
+Object.defineProperty(exports, "generateNextFileTaskId", { enumerable: true, get: function () { return taskOperations_1.generateNextFileTaskId; } });
+Object.defineProperty(exports, "addTaskFile", { enumerable: true, get: function () { return taskOperations_1.addTaskFile; } });
+Object.defineProperty(exports, "moveTaskFile", { enumerable: true, get: function () { return taskOperations_1.moveTaskFile; } });
+Object.defineProperty(exports, "completeTaskFile", { enumerable: true, get: function () { return taskOperations_1.completeTaskFile; } });
+Object.defineProperty(exports, "deleteTaskFile", { enumerable: true, get: function () { return taskOperations_1.deleteTaskFile; } });
+Object.defineProperty(exports, "appendLog", { enumerable: true, get: function () { return taskOperations_1.appendLog; } });
+Object.defineProperty(exports, "listTasks", { enumerable: true, get: function () { return taskOperations_1.listTasks; } });
+Object.defineProperty(exports, "findTask", { enumerable: true, get: function () { return taskOperations_1.findTask; } });
+Object.defineProperty(exports, "searchTaskFiles", { enumerable: true, get: function () { return taskOperations_1.searchTaskFiles; } });
+Object.defineProperty(exports, "searchLogs", { enumerable: true, get: function () { return taskOperations_1.searchLogs; } });
+// Export v2 workspace helpers (directory detection, board reconstruction, body helpers)
+var workspace_1 = require("./workspace");
+Object.defineProperty(exports, "getV2Dirs", { enumerable: true, get: function () { return workspace_1.getV2Dirs; } });
+Object.defineProperty(exports, "isV2", { enumerable: true, get: function () { return workspace_1.isV2; } });
+Object.defineProperty(exports, "ensureV2Dirs", { enumerable: true, get: function () { return workspace_1.ensureV2Dirs; } });
+Object.defineProperty(exports, "getTaskFilePath", { enumerable: true, get: function () { return workspace_1.getTaskFilePath; } });
+Object.defineProperty(exports, "getLogFilePath", { enumerable: true, get: function () { return workspace_1.getLogFilePath; } });
+Object.defineProperty(exports, "findV2Task", { enumerable: true, get: function () { return workspace_1.findV2Task; } });
+Object.defineProperty(exports, "extractDescription", { enumerable: true, get: function () { return workspace_1.extractDescription; } });
+Object.defineProperty(exports, "extractLog", { enumerable: true, get: function () { return workspace_1.extractLog; } });
+Object.defineProperty(exports, "composeBody", { enumerable: true, get: function () { return workspace_1.composeBody; } });
+Object.defineProperty(exports, "readV2BoardConfig", { enumerable: true, get: function () { return workspace_1.readV2BoardConfig; } });
+Object.defineProperty(exports, "buildBoardFromV2", { enumerable: true, get: function () { return workspace_1.buildBoardFromV2; } });
 /**
  * Main Brainfile class providing a high-level API
  */

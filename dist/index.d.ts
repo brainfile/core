@@ -7,20 +7,32 @@
  * @packageDocumentation
  */
 export * from './types';
-export { BrainfileParser, ParseResult } from './parser';
-export { inferType, inferRenderer, SchemaHints } from './inference';
+export * from './types/contract';
+export { type ContractPatch, setTaskContract, clearTaskContract, setTaskContractStatus, patchTaskContract, addTaskContractDeliverable, removeTaskContractDeliverable, addTaskContractValidationCommand, removeTaskContractValidationCommand, addTaskContractConstraint, removeTaskContractConstraint, } from './contract';
+export { BrainfileParser } from './parser';
+export type { ParseResult } from './parser';
+export { inferType, inferRenderer } from './inference';
+export type { SchemaHints } from './inference';
 export { parseSchemaHints, loadSchemaHints } from './schemaHints';
-export { BrainfileSerializer, SerializeOptions } from './serializer';
-export { BrainfileValidator, ValidationError, ValidationResult } from './validator';
-export { BrainfileLinter, LintIssue, LintResult, LintOptions } from './linter';
+export { BrainfileSerializer } from './serializer';
+export type { SerializeOptions } from './serializer';
+export { BrainfileValidator } from './validator';
+export type { ValidationError, ValidationResult } from './validator';
+export { BrainfileLinter } from './linter';
+export type { LintIssue, LintResult, LintOptions } from './linter';
 export { diffBoards, hashBoard, hashBoardContent, type BoardDiff, type ColumnDiff, type TaskDiff } from './realtime';
 export { BUILT_IN_TEMPLATES, generateTaskId, generateSubtaskId, processTemplate, getTemplateById, getAllTemplateIds } from './templates';
 export { type BoardOperationResult, type BulkOperationResult, type BulkItemResult, type TaskInput, type TaskPatch, moveTask, addTask, updateTask, deleteTask, toggleSubtask, updateBoardTitle, updateStatsConfig, archiveTask, restoreTask, patchTask, addSubtask, deleteSubtask, updateSubtask, setSubtasksCompleted, setAllSubtasksCompleted, moveTasks, patchTasks, deleteTasks, archiveTasks, addRule, deleteRule, } from './operations';
-export { findColumnById, findColumnByName, findTaskById, taskIdExists, getAllTasks, getTasksByTag, getTasksByPriority, getTasksByAssignee, searchTasks, getColumnTaskCount, getTotalTaskCount, columnExists, getTasksWithIncompleteSubtasks, getOverdueTasks } from './query';
+export { getBoardTypes, validateType, validateColumn, type BoardValidationResult, } from './boardValidation';
+export { findColumnById, findColumnByName, findTaskById, taskIdExists, getAllTasks, getTasksByTag, getTasksByPriority, getTasksByAssignee, searchTasks, getColumnTaskCount, getTotalTaskCount, columnExists, findCompletionColumn, isCompletionColumn, getTasksWithIncompleteSubtasks, getOverdueTasks } from './query';
 export { extractTaskIdNumber, getMaxTaskIdNumber, generateNextTaskId, generateSubtaskId as generateSubtaskIdFromIndex, generateNextSubtaskId, isValidTaskId, isValidSubtaskId, getParentTaskId } from './idGen';
-export { discover, findPrimaryBrainfile, findNearestBrainfile, watchBrainfiles, isBrainfileName, extractBrainfileSuffix, BRAINFILE_PATTERNS, BRAINFILE_GLOBS, EXCLUDE_DIRS, type DiscoveredFile, type DiscoveryOptions, type DiscoveryResult, } from './discovery';
+export { discover, findPrimaryBrainfile, findNearestBrainfile, watchBrainfiles, isBrainfileName, extractBrainfileSuffix, BRAINFILE_PATTERNS, BRAINFILE_GLOBS, EXCLUDE_DIRS, type DiscoveredFile, type DiscoveryOptions, type DiscoveryResult, type WatchError, type WatchResult, } from './discovery';
+export { findBrainfile, resolveBrainfilePath, getBrainfileStateDir, getBrainfileStatePath, getDotBrainfileGitignorePath, ensureDotBrainfileDir, ensureDotBrainfileGitignore, DOT_BRAINFILE_DIRNAME, BRAINFILE_BASENAME, BRAINFILE_STATE_BASENAME, DOT_BRAINFILE_GITIGNORE_BASENAME, type FoundBrainfile, type BrainfileResolutionKind, type ResolveBrainfilePathOptions, } from './utils/files';
 export { formatTaskForGitHub, formatTaskForLinear, type GitHubIssuePayload, type GitHubFormatOptions, type LinearIssuePayload, type LinearFormatOptions, } from './formatters';
-export type { Board, Column, Task, Subtask, Rule, Rules, TaskTemplate, TemplateVariable, TemplateConfig } from './types';
+export { parseTaskContent, serializeTaskContent, readTaskFile, writeTaskFile, readTasksDir, taskFileName, } from './taskFile';
+export { type TaskOperationResult, type TaskFileInput, type TaskFilters, generateNextFileTaskId, addTaskFile, moveTaskFile, completeTaskFile, deleteTaskFile, appendLog, listTasks, findTask, searchTaskFiles, searchLogs, } from './taskOperations';
+export { type V2Dirs, getV2Dirs, isV2, ensureV2Dirs, getTaskFilePath, getLogFilePath, findV2Task, extractDescription, extractLog, composeBody, readV2BoardConfig, buildBoardFromV2, } from './workspace';
+export type { Board, BoardConfig, Column, ColumnConfig, Task, TaskDocument, Subtask, Rule, Rules, TaskTemplate, TemplateVariable, TemplateConfig } from './types';
 /**
  * Main Brainfile class providing a high-level API
  */
@@ -97,6 +109,7 @@ export declare class Brainfile {
         column: number;
     } | null;
 }
-import { Board, SerializeOptions } from './index';
-import { LintOptions } from './linter';
+import type { Board } from './types';
+import type { SerializeOptions } from './serializer';
+import type { LintOptions } from './linter';
 //# sourceMappingURL=index.d.ts.map
