@@ -68,19 +68,23 @@ class BrainfileParser {
             warnings
         };
     }
-    /**
-     * Parse a brainfile.md file content
-     * @param content - The markdown content with YAML frontmatter
-     * @returns Parsed brainfile data or null if parsing fails
-     * @deprecated Use parseWithErrors() for type detection and error details
-     */
-    static parse(content) {
+    static formatDuplicateColumnWarnings(warnings) {
+        if (warnings.length === 0) {
+            return [];
+        }
+        return [
+            '[Brainfile Parser] Duplicate columns detected:',
+            ...warnings.map((warning) => `  - ${warning}`),
+        ];
+    }
+    static parseInternal(content, options = {}) {
+        const { emitWarnings = true, emitErrors = true } = options;
         try {
             // Extract YAML frontmatter
             const lines = content.split("\n");
             // Check for frontmatter start
-            if (!lines[0].trim().startsWith("---")) {
-                return null;
+            if (!lines[0]?.trim().startsWith("---")) {
+                return { data: null, warnings: [] };
             }
             // Find frontmatter end
             let endIndex = -1;
@@ -91,28 +95,40 @@ class BrainfileParser {
                 }
             }
             if (endIndex === -1) {
-                return null;
+                return { data: null, warnings: [] };
             }
             // Extract YAML content
             const yamlContent = lines.slice(1, endIndex).join("\n");
             // Parse YAML
             const data = yaml.load(yamlContent);
+            let formattedWarnings = [];
             // Consolidate duplicate columns (for board type compatibility)
-            if (data && data.columns) {
+            if (data && Array.isArray(data.columns)) {
                 const { columns, warnings } = this.consolidateDuplicateColumns(data.columns);
-                // Log warnings to console
-                if (warnings.length > 0) {
-                    console.warn('[Brainfile Parser] Duplicate columns detected:');
-                    warnings.forEach(warning => console.warn(`  - ${warning}`));
-                }
                 data.columns = columns;
+                formattedWarnings = this.formatDuplicateColumnWarnings(warnings);
+                if (emitWarnings) {
+                    formattedWarnings.forEach((warning) => console.warn(warning));
+                }
             }
-            return data;
+            return { data, warnings: formattedWarnings };
         }
         catch (error) {
-            console.error("Error parsing brainfile.md:", error);
-            return null;
+            if (emitErrors) {
+                console.error("Error parsing brainfile.md:", error);
+            }
+            return { data: null, warnings: [] };
         }
+    }
+    /**
+     * Parse a brainfile.md file content
+     * @param content - The markdown content with YAML frontmatter
+     * @returns Parsed brainfile data or null if parsing fails
+     * @deprecated Use parseWithErrors() for type detection and error details
+     */
+    static parse(content) {
+        const { data } = this.parseInternal(content, { emitWarnings: true, emitErrors: true });
+        return data;
     }
     /**
      * Parse with detailed error reporting, warnings, and type detection
@@ -122,50 +138,28 @@ class BrainfileParser {
      * @returns ParseResult with data, type, renderer, error message, and any warnings
      */
     static parseWithErrors(content, filename, schemaHints) {
-        const warnings = [];
-        // Temporarily capture console.warn calls
-        const originalWarn = console.warn;
-        console.warn = (...args) => {
-            const message = args.map(arg => String(arg)).join(' ');
-            // Capture all warnings from the parser (both header and detail lines)
-            if (message.includes('[Brainfile Parser]') || message.trim().startsWith('- Duplicate column')) {
-                warnings.push(message);
-            }
-            originalWarn(...args);
-        };
-        try {
-            const data = this.parse(content);
-            // Restore console.warn
-            console.warn = originalWarn;
-            if (!data) {
-                return {
-                    data: null,
-                    board: null,
-                    error: "Failed to parse YAML frontmatter",
-                    warnings: warnings.length > 0 ? warnings : undefined
-                };
-            }
-            // Infer type and renderer
-            const detectedType = (0, inference_1.inferType)(data, filename);
-            const renderer = (0, inference_1.inferRenderer)(detectedType, data, schemaHints);
-            return {
-                data,
-                type: detectedType,
-                renderer,
-                board: detectedType === types_1.BrainfileType.BOARD || !data.type ? data : null,
-                warnings: warnings.length > 0 ? warnings : undefined
-            };
-        }
-        catch (error) {
-            // Restore console.warn
-            console.warn = originalWarn;
+        const { data, warnings } = this.parseInternal(content, {
+            emitWarnings: false,
+            emitErrors: false,
+        });
+        if (!data) {
             return {
                 data: null,
                 board: null,
-                error: error instanceof Error ? error.message : String(error),
-                warnings: warnings.length > 0 ? warnings : undefined
+                error: "Failed to parse YAML frontmatter",
+                warnings: warnings.length > 0 ? warnings : undefined,
             };
         }
+        // Infer type and renderer
+        const detectedType = (0, inference_1.inferType)(data, filename);
+        const renderer = (0, inference_1.inferRenderer)(detectedType, data, schemaHints);
+        return {
+            data,
+            type: detectedType,
+            renderer,
+            board: detectedType === types_1.BrainfileType.BOARD || !data.type ? data : null,
+            warnings: warnings.length > 0 ? warnings : undefined,
+        };
     }
     /**
      * Find the line number of a task in the file

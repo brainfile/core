@@ -25,6 +25,8 @@ export declare class BrainfileParser {
      * @returns Deduplicated array of columns with merged tasks
      */
     private static consolidateDuplicateColumns;
+    private static formatDuplicateColumnWarnings;
+    private static parseInternal;
     /**
      * Parse a brainfile.md file content
      * @param content - The markdown content with YAML frontmatter
