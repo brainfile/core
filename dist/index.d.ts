@@ -29,8 +29,11 @@ export { extractTaskIdNumber, getMaxTaskIdNumber, generateNextTaskId, generateSu
 export { discover, findPrimaryBrainfile, findNearestBrainfile, watchBrainfiles, isBrainfileName, extractBrainfileSuffix, BRAINFILE_PATTERNS, BRAINFILE_GLOBS, EXCLUDE_DIRS, type DiscoveredFile, type DiscoveryOptions, type DiscoveryResult, type WatchError, type WatchResult, } from './discovery';
 export { findBrainfile, resolveBrainfilePath, getBrainfileStateDir, getBrainfileStatePath, getDotBrainfileGitignorePath, ensureDotBrainfileDir, ensureDotBrainfileGitignore, DOT_BRAINFILE_DIRNAME, BRAINFILE_BASENAME, BRAINFILE_STATE_BASENAME, DOT_BRAINFILE_GITIGNORE_BASENAME, type FoundBrainfile, type BrainfileResolutionKind, type ResolveBrainfilePathOptions, } from './utils/files';
 export { formatTaskForGitHub, formatTaskForLinear, type GitHubIssuePayload, type GitHubFormatOptions, type LinearIssuePayload, type LinearFormatOptions, } from './formatters';
+export { parseBoardConfig, serializeBoardConfig, readBoardConfig, writeBoardConfig, } from './boardFile';
 export { parseTaskContent, serializeTaskContent, readTaskFile, writeTaskFile, readTasksDir, taskFileName, } from './taskFile';
-export { type TaskOperationResult, type TaskFileInput, type TaskFilters, generateNextFileTaskId, addTaskFile, moveTaskFile, completeTaskFile, deleteTaskFile, appendLog, listTasks, findTask, searchTaskFiles, searchLogs, } from './taskOperations';
+export { type TaskOperationResult, type TaskFileInput, type TaskFilters, type CompleteTaskFileOptions, generateNextFileTaskId, addTaskFile, moveTaskFile, completeTaskFile, deleteTaskFile, appendLog, listTasks, findTask, searchTaskFiles, searchLogs, } from './taskOperations';
+export { buildLedgerRecord, appendLedgerRecord, readLedger, queryLedger, getFileHistory, getTaskContext, normalizePathValue, isLedgerContractStatus, } from './ledger';
+export { type DependencyGraphNode, MissingDependencyError, DependencyCycleError, topologicalSort, } from './graph';
 export { type V2Dirs, getV2Dirs, isV2, ensureV2Dirs, getTaskFilePath, getLogFilePath, findV2Task, extractDescription, extractLog, composeBody, readV2BoardConfig, buildBoardFromV2, } from './workspace';
 export type { Board, BoardConfig, Column, ColumnConfig, Task, TaskDocument, Subtask, Rule, Rules, TaskTemplate, TemplateVariable, TemplateConfig } from './types';
 /**
