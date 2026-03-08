@@ -33,6 +33,7 @@ export { parseBoardConfig, serializeBoardConfig, readBoardConfig, writeBoardConf
 export { parseTaskContent, serializeTaskContent, readTaskFile, writeTaskFile, readTasksDir, taskFileName, } from './taskFile';
 export { type TaskOperationResult, type TaskFileInput, type TaskFilters, type CompleteTaskFileOptions, type ContractTransitionOptions, type ContractTransitionWithFeedbackOptions, type CompleteContractOptions, DEFAULT_CONTRACT_COLUMN_MAP, generateNextFileTaskId, addTaskFile, moveTaskFile, completeTaskFile, deleteTaskFile, appendLog, listTasks, findTask, searchTaskFiles, searchLogs, pickupTaskContract, deliverTaskContract, completeTaskContract, failTaskContract, getEffectiveState, } from './taskOperations';
 export { buildLedgerRecord, appendLedgerRecord, readLedger, queryLedger, getFileHistory, getTaskContext, normalizePathValue, isLedgerContractStatus, } from './ledger';
+export { taskToCompletedRef, ledgerRecordToCompletedRef, } from './completed';
 export { type DependencyGraphNode, MissingDependencyError, DependencyCycleError, topologicalSort, } from './graph';
 export { type V2Dirs, getV2Dirs, isV2, ensureV2Dirs, getTaskFilePath, getLogFilePath, findV2Task, extractDescription, extractLog, composeBody, readV2BoardConfig, buildBoardFromV2, } from './workspace';
 export type { Board, BoardConfig, Column, ColumnConfig, Task, TaskDocument, Subtask, Rule, Rules, TaskTemplate, TemplateVariable, TemplateConfig } from './types';
