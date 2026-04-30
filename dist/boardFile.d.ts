@@ -27,40 +27,19 @@
  *
  * @packageDocumentation
  */
-
-import * as fs from 'fs';
-import * as path from 'path';
 import type { BoardConfig } from './types';
-import { parseBoardConfig, serializeBoardConfig } from './boardContent';
-
 export { parseBoardConfig, serializeBoardConfig } from './boardContent';
-
 /**
  * Read and parse a board config file from disk.
  *
  * @param filePath - Absolute path to the board config `.md` file
  * @returns Parsed config, body, and filePath; or null if file is invalid
  */
-export function readBoardConfig(filePath: string): { config: BoardConfig; body: string; filePath: string } | null {
-  let content: string;
-  try {
-    content = fs.readFileSync(filePath, 'utf-8');
-  } catch {
-    return null;
-  }
-
-  const parsed = parseBoardConfig(content);
-  if (!parsed) {
-    return null;
-  }
-
-  return {
-    config: parsed.config,
-    body: parsed.body,
-    filePath: path.resolve(filePath),
-  };
-}
-
+export declare function readBoardConfig(filePath: string): {
+    config: BoardConfig;
+    body: string;
+    filePath: string;
+} | null;
 /**
  * Write a board config to disk.
  *
@@ -68,10 +47,5 @@ export function readBoardConfig(filePath: string): { config: BoardConfig; body: 
  * @param config - Board configuration (YAML frontmatter)
  * @param body - Markdown body content
  */
-export function writeBoardConfig(filePath: string, config: BoardConfig, body: string = ''): void {
-  const dir = path.dirname(filePath);
-  fs.mkdirSync(dir, { recursive: true });
-
-  const content = serializeBoardConfig(config, body);
-  fs.writeFileSync(filePath, content, 'utf-8');
-}
+export declare function writeBoardConfig(filePath: string, config: BoardConfig, body?: string): void;
+//# sourceMappingURL=boardFile.d.ts.map
