@@ -1,3 +1,5 @@
+> ⚠️ **Moved.** brainfile now lives in one repo: <https://github.com/1broseidon/brainfile> — install with `npm i -g brainfile`. This repository is archived and read-only.
+
 # @brainfile/core
 
 TypeScript library for the [Brainfile](https://brainfile.md) task coordination protocol. Provides parsing configuration, reading/writing task files, managing contracts, and handling board state.
